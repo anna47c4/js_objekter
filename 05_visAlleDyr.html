@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visdyr</title>
+  </head>
+  <body>
+    <section id="liste"></section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", start);
+
+      let dyr = [
+        {
+          navn: "Gris",
+          billede: "http://mabe-kea.dk/E19/pics/pig.png",
+          type: "Pattedyr",
+          levested: "Svinefarme",
+        },
+        {
+          navn: "Frø",
+          billede: "http://mabe-kea.dk/E19/pics/frog.png",
+          type: "Amfibie",
+          levested: "Sumpen",
+        },
+        {
+          navn: "Ræv",
+          billede: "http://mabe-kea.dk/E19/pics/fox.png",
+          type: "Pattedyr",
+          levested: "Skoven",
+        },
+        {
+          navn: "Sild",
+          billede: "http://mabe-kea.dk/E19/pics/sild.jpg",
+          type: "Fisk",
+          levested: "Vandet",
+        },
+        {
+          navn: "Krokodille",
+          billede:
+            "http://mabe-kea.dk/E19/pics/kroko.jpghttp://mabe-kea.dk/E19/pics/kroko.jpg",
+          type: "Krybdyr",
+          levested: "Vand og land",
+        },
+      ];
+
+      function start() {
+        const listevisning = document.querySelector("#liste");
+        dyr.forEach((dyr) => {
+          listevisning.innerHTML += `<p>${dyr.navn} ${dyr.type} ${dyr.levested}</p>`;
+        });
+      }
+    </script>
+  </body>
+</html>
