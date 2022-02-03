@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visdyr</title>
+  </head>
+  <body>
+    <section class="data-container"></section>
+    <template>
+      <article class="liste">
+        <h3></h3>
+        <img src="" alt="" />
+        <p class="mærke">Mærke:</p>
+        <p class="model">Model:</p>
+        <p>Specifikationer:</p>
+        <ul class="mere"></ul>
+      </article>
+    </template>
+
+    <style>
+      article {
+        outline: 2px solid black;
+        margin: 5px;
+        padding: 5px;
+      }
+    </style>
+
+    <script>
+      //document.addEventListener("DOMContentLoaded", start);
+      const fil = "alleBiler.json";
+
+      async function hentdata(fil) {
+        const result = await fetch(fil);
+        const json = await result.json();
+        start(json);
+      }
+
+      function start(json) {
+        const container = document.querySelector(".data-container");
+        const bilTemplate = document.querySelector("template");
+
+        json.forEach((bil) => {
+          let klon = bilTemplate.cloneNode(true).content;
+          klon.querySelector("h3").textContent = bil.mærke;
+          klon.querySelector(".mærke").textContent = bil.model;
+          klon.querySelector(".model").textContent = bil.motor;
+          bil.udstyr.forEach((bil) => {
+            klon.querySelector(".mere").innerHTML += "<li>" + bil + "</li>";
+          });
+          container.appendChild(klon);
+        });
+      }
+
+      hentdata(fil);
+    </script>
+  </body>
+</html>
