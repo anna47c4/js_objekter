@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visdyr</title>
+  </head>
+  <body>
+    <section class="data-container"></section>
+    <template>
+      <article class="liste">
+        <h3></h3>
+        <img src="" alt="" />
+        <p class="type">Type:</p>
+        <p class="levested">Levested:</p>
+      </article>
+    </template>
+
+    <style>
+      article {
+        outline: 2px solid black;
+        margin: 5px;
+        padding: 5px;
+      }
+    </style>
+
+    <script>
+      //document.addEventListener("DOMContentLoaded", start);
+      const fil = "alleDyr.json";
+
+      async function hentdata(fil) {
+        const result = await fetch(fil);
+        const json = await result.json();
+        start(json);
+      }
+
+      function start(json) {
+        const container = document.querySelector(".data-container");
+        const dyrTemplate = document.querySelector("template");
+
+        json.forEach((dyr) => {
+          let klon = dyrTemplate.cloneNode(true).content;
+          klon.querySelector("h3").textContent = dyr.navn;
+          klon.querySelector("img").src = dyr.billede;
+          klon.querySelector(".type").textContent = dyr.type;
+          klon.querySelector(".levested").textContent = dyr.levested;
+          container.appendChild(klon);
+        });
+      }
+
+      hentdata(fil);
+    </script>
+  </body>
+</html>
